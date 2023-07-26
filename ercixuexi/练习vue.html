@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./CDN/开发环境.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .box {
+        width: 100px;
+        height: 100px;
+        background-color: #ccc;
+        margin: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .shan {
+        border: none;
+        background-color: #ccc;
+        color: white;
+    }
+
+    .haok {
+        width: 100%;
+        border: none;
+        background-image: linear-gradient(-20deg, #b721ff 0%, #21d4fd 100%);
+        color: white;
+    }
+</style>
+
+<body>
+    <div id="box" :style="{ 'background-color': dissapearColor }">{{msg}}
+        单向： <input type="text" v-bind:value="arr" placeholder="请输入"><br>
+        双向： <input type="text" v-model:value="arr2" placeholder="请输入">{{arr2}}
+        <hr>
+        <button @click="addBox">添加盒子</button>
+        <div class="container">
+            <div v-for="box in boxes" :key="box.id" class="box">
+                <p>{{ box.id }}</p><button @click="shan(box.id)" class="shan">删除</button>
+            </div>
+        </div>
+        <hr>
+        <button @click="bian" class="haok">{{beijing}}</button>
+        <hr>
+        <button @click="bzhuti" class="haok">切换主题</button>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: '#box',
+        data: {
+            msg: 'hello vue',
+            arr: '单向绑定',
+            arr2: '双向绑定',
+            boxes: [],
+            beijing: '随机变色',
+            bianse: 1,
+            dissapearColor: '#fff'
+        },
+        beforeCreate() {
+            let i = JSON.parse(localStorage.getItem("users"))
+            if (i == 2) {
+                document.querySelector("body").setAttribute("style", "background:#fff");
+            } else {
+                document.querySelector("body").setAttribute("style", "background:#000");
+            }
+        },
+        methods: {
+            bzhuti() {
+                if (this.bianse == 1) {
+                    this.bianse = 2
+                    localStorage.setItem("users", JSON.stringify(2))
+                    document.querySelector("body").setAttribute("style", "background:#fff");
+                } else {
+                    this.bianse = 1
+                    localStorage.setItem("users", JSON.stringify(1))
+                    document.querySelector("body").setAttribute("style", "background:#000");
+                }
+            },
+            bian() {
+                const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+                this.dissapearColor = randomColor;
+            },
+            addBox() {
+                const newBox = {
+                    id: this.boxes.length + 1
+                };
+                this.boxes.push(newBox);
+                console.log(this.boxes);
+            },
+            shan(a) {
+                let arr = confirm('确定删除吗？')
+                if (arr) {
+                    let abb = this.boxes[a - 1]
+                    this.boxes.splice(abb, 1)
+                }
+            }
+        }
+    })
+</script>
+
+</html>

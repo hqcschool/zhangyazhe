@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./CDN/开发环境.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    table {
+        margin: auto;
+        margin-top: 10%;
+    }
+
+    .tianjia {
+        width: 220px;
+        height: 200px;
+        border-radius: 5px;
+        position: absolute;
+        top: 10%;
+        left: 5%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
+        padding: 50px;
+    }
+
+    h2 {
+        margin-left: 35%;
+        margin-bottom: 30px;
+    }
+
+    .tian {
+        margin-left: 15.2%;
+        border: none;
+        background-image: linear-gradient(0deg, #cfd9df 0%, #e2ebf0 100%);
+        width: 80px;
+        height: 30px;
+        position: absolute;
+        top: 18%;
+    }
+
+    .yang {
+        border: none;
+        width: 80px;
+        height: 40px;
+        margin-top: 30px;
+        border-radius: 5px;
+        margin-left: 27px;
+    }
+</style>
+
+<body>
+    <div id="box">
+        计算器： <input v-model="expression" @input="calculate" type="text" placeholder="输入表达式"> <span>{{ result }}</span>
+        <div class="tianjia" v-if="jiaxiu">
+            <h2>{{biaoti}}</h2>
+            姓名：<input type="text" placeholder="填写姓名" v-model="name"><br>
+            年龄：<input type="text" placeholder="填写年龄" v-model="age"><br>
+            性别：<input type="text" placeholder="填写性别" v-model="sex"><br>
+            <button @click="add" v-if="cang" class="yang">{{queren}}</button>
+            <button @click="jiaxiu=false" class="yang">{{quxiao}}</button>
+        </div>
+        <button @click="xianshi" class="tian">添加</button>
+        <table border="1" style="width: 600px; text-align: center;">
+            <tr>
+                <td>姓名</td>
+                <td>性别</td>
+                <td>年龄</td>
+                <td>操作</td>
+            </tr>
+            <tbody>
+                <tr v-for="item,index in list" :key="index">
+                    <td>{{item.name}}</td>
+                    <td>{{item.sex}}</td>
+                    <td>{{item.age}}</td>
+                    <td>
+                        <button @click="cha(index)">查看</button>
+                        <button @click="shan(index)">删除</button>
+                        <button @click="xius(index)">修改</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: '#box',
+        data: {
+            quxiao: '取消添加',
+            queren: '确认添加',
+            cang: true,
+            jiaxiu: false,
+            biaoti: '添加信息',
+            name: '',
+            result: '',
+            sex: '',
+            age: '',
+            expression: '',
+            list: [
+                {
+                    name: '张三',
+                    sex: '男',
+                    age: '18'
+                },
+                {
+                    name: '李四',
+                    sex: '女',
+                    age: '19'
+                },
+                {
+                    name: '王五',
+                    sex: '男',
+                    age: '20'
+                }
+            ],
+            xia: ''
+        },
+        methods: {
+            calculate() {
+                try {
+                    this.result = eval(this.expression);
+                } catch (error) {
+                    this.result = '请输入完整';
+                }
+            },
+            //修
+            xius(index) {
+                this.jiaxiu = true;
+                this.biaoti = '修改信息';
+                this.name = this.list[index].name;
+                this.sex = this.list[index].sex;
+                this.age = this.list[index].age;
+                this.quxiao = '取消修改';
+                this.queren = '确认修改';
+                this.xia = index
+            },
+            //查
+            cha(index) {
+                this.quxiao = '关闭查看'
+                this.biaoti = '查看信息';
+                this.name = this.list[index].name;
+                this.sex = this.list[index].sex;
+                this.age = this.list[index].age;
+                this.jiaxiu = true;
+                this.cang = false;
+            },
+            //加/修
+            add() {
+                if (this.biaoti == '添加信息') {
+                    this.list.push({
+                        name: this.name,
+                        sex: this.sex,
+                        age: this.age
+                    })
+                    alert('添加成功')
+                    this.jiaxiu = false;
+                } else {
+                    this.list[this.xia].name = this.name
+                    this.list[this.xia].sex = this.sex
+                    this.list[this.xia].age = this.age
+                    alert('修改成功')
+                    this.jiaxiu = false;
+                }
+
+            },
+            xianshi() {
+                this.name = ''
+                this.sex = ''
+                this.age = ''
+                this.jiaxiu = true;
+                this.quxiao = '关闭添加'
+                this.cang = true;
+                this.biaoti = '添加信息';
+            },
+            //删
+            shan(index) {
+                let arr = confirm('确定删除吗？')
+                if (arr) {
+                    this.list.splice(index, 1)
+                    alert('删除成功')
+                } else {
+                    alert('取消删除')
+                }
+            }
+        }
+    })
+</script>
+
+</html>
