@@ -24,7 +24,7 @@
         border-radius: 5px;
         position: absolute;
         top: 10%;
-        left: 5%;
+        right: 5%;
         box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
         padding: 50px;
     }
@@ -58,6 +58,18 @@
         margin-top: 10%;
         margin-left: 230px;
     }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    .aaaa {
+        background-color: #878787;
+    }
+
+    .aaaa1 {
+        background-color: rgb(199, 199, 199);
+    }
 </style>
 
 <body>
@@ -73,7 +85,7 @@
         </div>
         <button @click="xianshi" class="tian">添加</button>
         <input type="text" name="" id="sou" placeholder="请输入相关类型" @keyup="searchfun()" v-model="search">
-        <table border="1" style="width: 600px; text-align: center;">
+        <table border="1" style="width: 600px; text-align: center;" rowspan="1">
             <tr>
                 <td>姓名</td>
                 <td>性别</td>
@@ -81,7 +93,7 @@
                 <td>操作</td>
             </tr>
             <tbody>
-                <tr v-for="item,index in flag?newarr:list" :key="index">
+                <tr v-for="item,index in flag?newarr:list" :key="index" :class="index%2==0?'aaaa':'aaaa1'">
                     <td>{{item.name}}</td>
                     <td>{{item.sex}}</td>
                     <td>{{item.age}}</td>
@@ -162,6 +174,7 @@
                 this.quxiao = '取消修改';
                 this.queren = '确认修改';
                 this.xia = index
+                this.cang = true
             },
             //查
             cha(index) {
