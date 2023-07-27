@@ -167,23 +167,28 @@
             //添加
             add() {
                 let abb = this.id++
-                let arr = {
-                    id: abb,
-                    name: this.name,
-                    sex: this.sex,
-                    age: this.age
-                }
                 if (this.sex == 0) {
                     alert('请选择性别')
                 } else if (this.sex == 1) {
-                    this.sex = '男'
-                    this.sex = 1
+                    let arr = {
+                        id: abb,
+                        name: this.name,
+                        sex: this.sex,
+                        age: this.age
+                    }
+                    arr.sex = '男'
                     this.list.push(arr)
                 } else if (this.sex == 2) {
-                    this.sex = '女'
-                    this.sex = 2
+                    let arr = {
+                        id: abb,
+                        name: this.name,
+                        sex: this.sex,
+                        age: this.age
+                    }
+                    arr.sex = '女'
                     this.list.push(arr)
                 }
+
             },
             //删除
             del(index) {
