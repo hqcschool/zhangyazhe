@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./CDN/开发环境.js"></script>
+</head>
+<style>
+    .huang {
+        background-color: yellow;
+    }
+
+    .fen {
+        background-color: pink;
+    }
+
+
+    .hover-bg {
+        background-color: orange;
+    }
+
+    .selected-row {
+        background-color: green;
+    }
+</style>
+
+<body>
+    <div id="box">
+        <input type="text" v-model="name">
+        <select name="fruit" v-model="sex">
+            <option value="0">请选择一个性别</option>
+            <option value="1">男</option>
+            <option value="2">女</option>
+        </select>
+        <input type="text" v-model="age">
+        <button @click="add">提交</button><br><br>
+        <select name="fruit" v-model="ziduan">
+            <option value="0">请选择一个排序字段</option>
+            <option value="1">编号</option>
+            <option value="2">年龄</option>
+        </select>
+        <select name="fruit" v-model="fangshi">
+            <option value="0">请选择一个排序方式</option>
+            <option value="1">升序</option>
+            <option value="2">降序</option>
+        </select>
+        <button @click="pai">排序</button><br><br>
+        <table border="1" style="width: 100%; text-align: center;">
+            <thead>
+                <tr>
+                    <th>全选 <input type="checkbox" v-model="selectAll" @change="toggleSelectAll"> </th>
+                    <th>编号</th>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>年龄</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item,index) in list" :key="index"
+                    :class="[index%2==0?'huang':'fen',{ 'hover-bg': hoverIndex === index },{ 'selected-row': item.selected }]"
+                    @mouseover="hoverIndex = index" @mouseout="hoverIndex = -1">
+                    <td><input type="checkbox" v-model="item.selected" @change="fan"></td>
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.sex}}</td>
+                    <td>{{item.age}}</td>
+                    <td>
+                        <button @click="shang(index)">上移</button>
+                        <button @click="xia(index)">下移</button>
+                        <button @click="del(index)">删除</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: '#box',
+        data: {
+            hoverIndex: -1,
+            qx: '',
+            qxs: '',
+            ziduan: 0,
+            fangshi: 0,
+            name: '名',
+            sex: 0,
+            age: '100',
+            selectAll: false,
+            list: [
+                {
+                    id: 1,
+                    name: '张三',
+                    sex: '男',
+                    age: 18,
+                    selected: false
+                },
+                {
+                    id: 2,
+                    name: '李四',
+                    sex: '女',
+                    age: 19,
+                    selected: false
+                },
+                {
+                    id: 3,
+                    name: '王五',
+                    sex: '男',
+                    age: 20,
+                    selected: false
+                }
+            ],
+            id: 4
+        },
+        methods: {
+            //排序
+            pai() {
+                if (this.ziduan == 2 && this.fangshi == 2) {
+                    this.list.sort((a, b) => b.age - a.age);
+                } else if (this.ziduan == 2 && this.fangshi == 1) {
+                    this.list.sort((a, b) => a.age - b.age);
+                }
+                if (this.ziduan == 1 && this.fangshi == 2) {
+                    this.list.sort((a, b) => b.id - a.id);
+                } else if (this.ziduan == 1 && this.fangshi == 1) {
+                    this.list.sort((a, b) => a.id - b.id);
+                }
+            },
+            //点击表格内的复选框让那个全选按钮变选中或不选中
+            fan() {
+                let abb = []
+                this.list.forEach(item => {
+                    if (item.selected == true) {
+                        abb.push(item.selected)
+                    }
+                });
+                if (abb.length == 3) {
+                    this.selectAll = true
+                } else {
+                    this.selectAll = false
+                }
+            },
+            //全选反选
+            toggleSelectAll() {
+                this.list.forEach(item => {
+                    item.selected = this.selectAll;
+                });
+            },
+            //下移
+            xia(index) {
+                if (index < this.list.length - 1) {
+                    const temp = this.list[index];
+                    this.list.splice(index, 1);
+                    this.list.splice(index + 1, 0, temp);
+                }
+            },
+            //上移
+            shang(index) {
+                if (index > 0) {
+                    const temp = this.list[index];
+                    this.list.splice(index, 1);
+                    this.list.splice(index - 1, 0, temp);
+                }
+            },
+            //添加
+            add() {
+                let abb = this.id++
+                let arr = {
+                    id: abb,
+                    name: this.name,
+                    sex: this.sex,
+                    age: this.age
+                }
+                if (this.sex == 0) {
+                    alert('请选择性别')
+                } else if (this.sex == 1) {
+                    this.sex = '男'
+                    this.sex = 1
+                    this.list.push(arr)
+                } else if (this.sex == 2) {
+                    this.sex = '女'
+                    this.sex = 2
+                    this.list.push(arr)
+                }
+            },
+            //删除
+            del(index) {
+                if (confirm('确定删除吗？')) {
+                    this.list.splice(index, 1)
+                }
+            }
+        }
+    })
+</script>
+
+</html>
