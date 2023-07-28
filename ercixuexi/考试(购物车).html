@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./CDN/开发环境.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .lie {
+        width: 70%;
+        height: 90vh;
+        margin: auto;
+        margin-top: 2vh;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    .lie .hezi {
+        width: 18%;
+        height: 40%;
+        border: 1px solid #ccc;
+    }
+
+    img {
+        width: 100%;
+        height: 65%;
+    }
+
+    .but {
+        padding: 0px 10px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .te {
+        display: inline-block;
+        font-size: 10px;
+        background-image: linear-gradient(90deg, #fe32a5 0%, #f441cb 0%, #ef46d9 21%, #ee49df 52%, #e94eec 78%, #e555fc 100%);
+        width: 40px;
+        height: 20px;
+        text-align: center;
+        border-radius: 10px;
+        color: #fff;
+    }
+
+    .jiage {
+        font-size: 18px;
+    }
+
+    .dazheqian {
+        font-size: 10px;
+        color: #a2a2a2;
+        margin-left: 3px;
+    }
+
+    .zhe {
+        font-size: 10px;
+        color: #a2a2a2;
+        margin-left: 3px;
+    }
+
+    .xiangqing {
+        font-size: 10px;
+        color: #929292;
+    }
+
+    .xin {
+        border: none;
+        border-radius: 5px;
+        background-color: #deefdd;
+        color: #69b56d;
+        font-size: 10px;
+    }
+
+    /* 下边 样式 */
+    #bxobottom {
+        width: 70%;
+        margin: auto;
+        margin-top: 40px;
+
+    }
+
+    #bottom_top .xian {
+        width: 100%;
+        border-bottom: 2px solid #ddd;
+    }
+
+    #bottom_top p {
+        width: 120px;
+        padding-left: 10px;
+        color: #DF3D87;
+        border-bottom: 2.5px solid #DF3D87;
+        padding-bottom: 12px;
+        font-weight: 700;
+    }
+
+    #bottombiao {
+        width: 100%;
+    }
+
+    #bottombiao_top {
+        width: 100%;
+        height: 40px;
+    }
+
+    #bottombiao_top ul {
+        height: 45px;
+        background-color: #F9F9F9;
+        display: flex;
+        line-height: 45px;
+        border: 2px solid #ddd;
+        justify-content: space-around;
+    }
+
+    ul li {
+        list-style: none;
+    }
+
+    #bottombiao_son {
+        width: 100%;
+        border: 1.5px solid #ddd;
+    }
+
+    .bottom_son {
+        display: flex;
+        margin-top: 20px;
+        justify-content: space-around;
+    }
+
+    /* .bottom_son input {
+        margin-top: 30px;
+    } */
+
+    .bottom_son img {
+        width: 90px;
+        height: 100px;
+    }
+
+    .bottom_sonzuo {
+        width: 280px;
+        display: flex;
+        line-height: 20px;
+        margin-left: -75px;
+        /* flex-wrap: wrap; */
+    }
+
+    .bottom_sonzuo p {
+        margin-left: 10px;
+        margin-top: -2px;
+    }
+
+    .bottom_sonzuo p:nth-child(2) {
+        margin-left: 10px;
+    }
+
+    .bottom_sonzongzuo {
+        margin-left: -180px;
+    }
+
+    #xinr {
+        width: 99.9%;
+        height: 45px;
+        display: flex;
+        border: 2px solid #ddd;
+    }
+
+    #xinr .xinr_yi {
+        width: 50px;
+        height: 20px;
+        margin-top: 15px;
+        text-align: center;
+        border: 1px solid #8BBDF8;
+        border-radius: 50px;
+        color: #8BBDF8;
+        margin-left: 10px;
+    }
+
+    #xinr .xinr_er {
+        text-align: center;
+        margin-left: 10px;
+        line-height: 50px;
+        color: #ddd;
+    }
+
+    #xinr .xinr_san {
+        width: 20px;
+        height: 20px;
+        margin-top: 15px;
+        text-align: center;
+        border: 1px solid #8BBDF8;
+        margin-left: 15px;
+        border-radius: 50px;
+        color: #8BBDF8;
+    }
+
+    #dibu {
+        width: 70%;
+        border: 2px solid #ddd;
+        /* height: 200px; */
+        margin: auto;
+        margin-top: 20px;
+    }
+
+    #dibu select {
+        line-height: 50px;
+        margin: 30px;
+        border: 1px solid #DD307F;
+        height: 35px;
+        color: #DD307F;
+    }
+
+    #dibu #dibuyou {
+        margin: 20px;
+    }
+
+    #dibu #dibuyou span {
+        color: #E05E95;
+    }
+
+    #dibu #dibuyou b {
+        margin-left: 25px;
+    }
+
+    #dibu #dibutop {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #dibutibu {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        background-color: #F3F3F3;
+        justify-content: right;
+    }
+
+    .san {
+        width: 15px;
+        height: 15px;
+        margin-top: 18px;
+        text-align: center;
+        border: 3px solid #8BBDF8;
+        margin-left: 15px;
+        font-size: 12px;
+        border-radius: 50px;
+        color: #8BBDF8;
+        margin-right: 15px;
+    }
+
+    .nidaye {
+        text-align: center;
+        background-color: #DD307F;
+        width: 200px;
+        color: #ffff;
+        height: 50px;
+        line-height: 50px;
+    }
+
+    .bottom_sonzhongyou input {
+        text-align: center;
+        width: 20px;
+    }
+</style>
+
+<body>
+    <div id="box">
+        <div class="lie">
+            <div class="hezi" v-for="(item,index) in list" :key="index" @dblclick="add(index)">
+                <img :src="item.img" alt="">
+                <div class="but">
+                    <span class="te">{{item.price2}}</span>
+                    <span class="jiage">￥{{item.price}}</span>
+                    <del class="dazheqian">￥{{item.price1}}</del>
+                    <span class="zhe"> {{item.price3}}折</span>
+                    <span class="xiangqing">{{item.name}}</span>
+                    <button class="xin">{{item.xin}}</button>
+                </div>
+            </div>
+        </div>
+        <div id="bxobottom">
+            <div id="bottom_top">
+                <p>特卖商品 <a v-if="poi">{{countdown}}</a></p>
+                <div class="xian"></div>
+            </div>
+
+            <div id="boxjiao_zhong">
+                <p>配送至<b>广州市</b> &nbsp;|&nbsp; 勾选商品“<input type="checkbox" name="" id="">”即可锁定库存20分钟，倒计时内不用担心商品被抢走~</p>
+            </div>
+            <div id="bottombiao">
+                <div id="bottombiao_top">
+                    <ul>
+                        <li>商品</li>
+                        <li>单价</li>
+                        <li>数量</li>
+                        <li>操作</li>
+                    </ul>
+                </div>
+                <p style="color: #EAA1CB;padding: 10px;">唯品自营</p>
+                <div id="bottombiao_son">
+                    <div class="bottom_son" v-for="(item,index) in lists" :key="index">
+                        <div class="bottom_sonzuo">
+                            <input type="checkbox" v-model="item.isChecked" @change="shijian(index)">
+                            <img :src="item.img" alt="">
+                            <div id="p">
+                                <p>{{item.name}}</p>
+                                <p>尺码:均码</p>
+                            </div>
+                        </div>
+                        <div class="bottom_sonzongzuo">
+                            <p> ￥{{item.price}}</p>
+                        </div>
+                        <div class="bottom_sonzhongyou">
+                            <button @click="jia(index)">+</button>
+                            <input type="text" name="" id="" v-model="item.shuliang" disabled="disabled">
+                            <button @click="jian(index)">-</button>
+                        </div>
+                        <div class="bottom_sonyou">
+                            <p @click="del(index)">删除</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="xinr">
+                    <div class="xinr_yi">运费</div>
+                    <div class="xinr_er">新人免邮</div>
+                    <div class="xinr_san">?</div>
+                </div>
+            </div>
+        </div>
+        <div id="dibu">
+            <div id="dibutop">
+                <div id="dibuzuo">
+                    <select name="" id="" v-model="youhui" @change="you">
+                        <option value="使用优惠券">使用优惠券</option>
+                        <option value="5优惠券">5优惠券</option>
+                        <option value="10优惠券">10优惠券</option>
+                    </select>
+                </div>
+                <div id="dibuyou">
+                    <p>金额<b>￥{{qwe}}</b></p>
+                    <p>总金额 (未含运费) <span><b>￥{{qwe}}</b></span> </p>
+                </div>
+            </div>
+            <div id="dibutibu">
+                <p>请在倒计时结束前结算</p>
+                <div class="san">?</div>
+                <div class="nidaye">
+                    立即结算 <a v-if="poi">{{countdown}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: '#box',
+        data: {
+            poi: false,
+            count: '', //倒计时
+            seconds: 1200, // 10天的秒数
+            isChecked: false,
+            dingshi: false,
+            youhui: '使用优惠券',
+            abb: '',
+            qwe: 0,
+            lists: [],
+            mei: 0,
+            wuyuan: 5,
+            countdown: 1200,
+            timer: null,
+            shiyuan: 10,
+            list: [
+                {
+                    img: 'https://h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvis/100302/2023/0524/99/fe438026-9c50-4cb4-b480-5600f82827df_273x273_90.jpg',
+                    isChecked: false,
+                    name: '夏季T恤女胶襄款合体短袖恤女式T',
+                    price: 83.6,
+                    price1: '169',
+                    price3: '4.9',
+                    price2: '特卖价',
+                    shuliang: 1,
+                    xin: '新货上架'
+                },
+                {
+                    img: 'https://h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvop/00100302/10000601/1819788740-3247453898801025050-3247453898801049622-1_273x273_90.jpg',
+                    isChecked: false,
+                    name: '夏季运动裤男休闲简约百搭系列可收缩卫裤男士休闲裤',
+                    price: 84.5,
+                    price1: '299',
+                    shuliang: 1,
+                    price3: '2.8',
+                    price2: '会员价'
+                },
+                {
+                    img: 'https://h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvis/100302/2021/1207/47/cd334141-bb40-47c9-8a3f-bfe82d056de0_273x273_90.jpg',
+                    isChecked: false,
+                    name: '[斜插袋设计]牛仔裤女夏季热销宽松复古阔腿女士牛仔裤长裤',
+                    price: 108,
+                    price1: '299',
+                    shuliang: 1,
+                    price3: '3.6',
+                    price2: '会员价'
+                },
+                {
+                    img: 'https://h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvis/100302/2021/0813/190/c6dda0b3-d4fd-4ffc-96b1-c6f745342937_273x273_90.jpg',
+                    isChecked: false,
+                    name: '短裤男夏季夏季都市细节梭织中裤校园休闲男士休闲裤',
+                    price: 72,
+                    price1: '239',
+                    price3: '3.0',
+                    shuliang: 1,
+                    price2: '会员价'
+                },
+                {
+                    img: 'https://h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvis/100302/2023/0321/40/f616dd4c-7b36-4a88-820b-bf7781d99b33_273x273_90.jpg',
+                    isChecked: false,
+                    name: 'T恤男夏季针织短袖恤男女同款KUROMI前胸印花男士T恤',
+                    price: 109.1,
+                    price1: '199',
+                    price3: '5.5',
+                    shuliang: 1,
+                    price2: '节日价'
+                },
+                {
+                    img: 'https://h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvis/100302/2023/0426/142/6ea86894-c819-4b17-8faa-9a5e1ba02b89_273x273_90.jpg',
+                    isChecked: false,
+                    name: '夏季T恤女MTEE史迪奇基本款斑驳印花针织短袖恤女士T恤',
+                    price: 83.7,
+                    price1: '169',
+                    price3: '5.0',
+                    shuliang: 1,
+                    price2: '什么价'
+                },
+                {
+                    img: 'https://h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvis/100302/2023/0320/12/2804d0e1-2993-494e-8e5d-855e860d6c80_273x273_90.jpg',
+                    isChecked: false,
+                    name: 'T恤男夏季针织短袖恤男女同款基本圆领字母印花男士T恤',
+                    price: 84,
+                    price1: '139',
+                    price3: '6.0',
+                    shuliang: 1,
+                    price2: '特卖价',
+                    xin: '新货上架'
+                },
+                {
+                    img: 'https://h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvop/00100302/10000601/864219447-1899751568052076631-1899751568052080818-1_273x273_90.jpg',
+                    isChecked: false,
+                    name: '秋季时尚潮流夹克男休闲宽松简约百搭运动经典外套男士夹克',
+                    price: 83.9,
+                    price1: '369',
+                    shuliang: 1,
+                    price3: '2.3',
+                    price2: '大卖价'
+                },
+                {
+                    img: 'https://h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvop/00100302/10000601/727583830-1612928699477930052-1612928699477934204-1_273x273_90.jpg',
+                    isChecked: false,
+                    name: '[反光图案点缀]卫衣男长袖连帽时尚休闲百搭帅气男士卫衣',
+                    price: 114,
+                    shuliang: 1,
+                    price1: '339',
+                    price3: '3.4',
+                    price2: '特卖价'
+                },
+                {
+                    img: 'https://h2.appsimg.com/a.appsimg.com/upload/merchandise/pdcvis/100302/2023/0327/11/2f03332e-9d6a-4347-b441-f268a4a9e926_273x273_90.jpg',
+                    isChecked: false,
+                    name: 'T恤女夏季针织短袖恤MTEE迪士尼狮子王线绣短袖女士T恤',
+                    price: 72,
+                    price1: '169',
+                    shuliang: 1,
+                    price3: '4.3',
+                    price2: '随便价'
+                },
+            ]
+        },
+        methods: {
+            you() {
+                let dfg = this.qwe
+                if (this.youhui == '使用优惠券') {
+                    dfg -= 0
+                    this.qwe = dfg
+                } else if (this.youhui == '5优惠券') {
+                    dfg -= 5
+                    this.qwe = dfg
+                } else if (this.youhui == '10优惠券') {
+                    dfg -= 10
+                    this.qwe = dfg
+                }
+            },
+            jian(index) {
+                if (this.lists[index].shuliang == 1) {
+                    alert('最少买一个吧')
+                    this.lists[index].shuliang = 1
+                } else {
+                    this.lists[index].shuliang--
+                }
+            },
+            jia(index) {
+                if (this.lists[index].shuliang == 2) {
+                    alert('没数量了')
+                    this.lists[index].shuliang = 2
+                } else {
+                    this.lists[index].shuliang++
+                }
+            },
+            shijian(index) {
+                let yui = []
+                this.lists.forEach((item) => {
+                    yui.push(item.isChecked)
+                })
+                if (yui.some(checkbox => checkbox)) {
+                    this.poi = true
+                    clearInterval(this.timer);
+                    this.timer = setInterval(() => {
+                        this.countdown--;
+                        if (this.countdown === 0) {
+                            clearInterval(this.timer);
+                        }
+                    }, 1000);
+                } else {
+                    this.poi = false
+                    clearInterval(this.timer);
+                }
+                if (this.lists[index].isChecked) {
+                    let arr = this.lists[index].price * this.lists[index].shuliang
+                    this.qwe += arr
+                } else {
+                    let wer = this.qwe - this.lists[index].price * this.lists[index].shuliang
+                    this.qwe = wer
+                }
+            },
+            //添加
+            add(index) {
+                let arr = this.list[index]
+                this.lists.push(arr)
+            },
+            //删除
+            del(index) {
+                if (confirm('确定删除吗？')) {
+                    this.lists.splice(index, 1)
+                }
+            }
+        }
+    })
+</script>
+
+</html>

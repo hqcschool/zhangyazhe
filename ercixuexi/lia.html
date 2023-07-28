@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./CDN/开发环境.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="checkbox" v-model="checkboxes[0]" @change="startCountdown()">
+        <input type="checkbox" v-model="checkboxes[1]" @change="startCountdown()">
+        <span v-if="countdown > 0">{{ countdown }}</span>
+    </div>
+
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            checkboxes: [false, false],
+            countdown: 0,
+            timer: null
+        },
+
+        methods: {
+            startCountdown() {
+                if (this.checkboxes.some(checkbox => checkbox)) {
+                    // 如果有复选框选中，则开始倒计时
+                    this.formatTime()
+                    this.countdown = 20 * 60; // 设置倒计时时间为20分钟
+                    clearInterval(this.timer); // 清除之前的定时器
+                    this.timer = setInterval(() => {
+                        this.countdown--;
+                        if (this.countdown === 0) {
+                            clearInterval(this.timer);
+                        }
+                    }, 1000);
+                } else {
+                    // 如果没有复选框选中，则清除倒计时
+                    this.countdown = 0;
+                    clearInterval(this.timer);
+                }
+            },
+            formatTime(seconds) {
+                const minutes = Math.floor(seconds / 60);
+                const remainingSeconds = seconds % 60;
+                return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+            }
+        }
+
+
+    });
+
+</script>
+
+</html>

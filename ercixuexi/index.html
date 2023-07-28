@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.staticfile.org/vue/2.7.0/vue.min.js"></script>
+</head>
+<style>
+    #box {
+        width: 90%;
+        margin: auto;
+
+    }
+
+    #box_top {
+        width: 98%;
+        height: 650px;
+        margin: auto;
+        display: flex;
+        margin-top: 10px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+
+
+    .box_top_tuw img {
+        width: 99%;
+        height: 200px;
+    }
+
+    .box_top_tuw {
+        width: 235px;
+        height: 290px;
+        border: 1px solid #ddd;
+        text-align: center;
+        margin-left: 10px;
+        /* margin-top: 20px; */
+    }
+
+    .box_top_wenzi {
+        display: flex;
+    }
+
+    .box_top_wenzi span {
+        height: 20px;
+        padding: 2px;
+        margin-left: 10px;
+        border-radius: 10px;
+        background-image: linear-gradient(120deg, #F294C6 0%, #D75CEB 100%);
+        color: #ffff;
+    }
+
+    .box_top_wenzi p {
+        margin-left: 10px;
+        margin-top: 0px;
+        color: #AAAFB6;
+    }
+
+    .box_top_tuw_son {
+
+        text-align: center;
+        margin-top: -20px;
+        width: 185px;
+        -webkit-line-clamp: 2;
+        /* 设置几行  */
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* 下边 样式 */
+    #box_jiao {
+        width: 100%;
+        height: 400px;
+        margin: auto;
+        margin-top: 40px;
+
+    }
+
+    #box_jiao_top .xian {
+        width: 100%;
+        border-bottom: 2px solid #ddd;
+        margin-top: -16px;
+    }
+
+    #box_jiao_top p {
+        width: 120px;
+        padding-left: 10px;
+        color: #DF3D87;
+        border-bottom: 2.5px solid #DF3D87;
+        padding-bottom: 12px;
+        font-weight: 700;
+    }
+
+    #box_jiaobiao {
+        width: 100%;
+    }
+
+    #box_jiaobiao_top {
+        width: 100%;
+        height: 40px;
+    }
+
+    #box_jiaobiao_top ul {
+        height: 45px;
+        background-color: #F9F9F9;
+        display: flex;
+        line-height: 45px;
+        border: 2px solid #ddd;
+        justify-content: space-around;
+    }
+
+    ul li {
+        list-style: none;
+    }
+
+    #box_jiaobiao_son {
+        width: 100%;
+        border: 1.5px solid #ddd;
+        height: 300px;
+    }
+
+    .box_jiao_son {
+        display: flex;
+        margin-top: 20px;
+        justify-content: space-around;
+    }
+
+    .box_jiao_sonzuo input {
+        margin-top: -35px;
+        margin-right: 10px;
+    }
+
+    .box_jiao_son img {
+        width: 90px;
+        height: 100px;
+    }
+
+    .box_jiao_sonzuo {
+        width: 280px;
+        display: flex;
+        line-height: 20px;
+        margin-left: -100px;
+        /* flex-wrap: wrap; */
+    }
+
+    .box_jiao_sonzuo p {
+        margin-left: 10px;
+        margin-top: -2px;
+    }
+
+    .box_jiao_sonzuo p:nth-child(2) {
+        margin-left: 10px;
+        margin-top: -10px;
+    }
+
+    #wuliao {
+        width: 100%;
+        height: 300px;
+        overflow: auto;
+    }
+
+    #xinr {
+        width: 99.9%;
+        height: 45px;
+        display: flex;
+        border: 2px solid #ddd;
+    }
+
+    #xinr .yi {
+        width: 50px;
+        height: 20px;
+        margin-top: 15px;
+        text-align: center;
+        border: 1px solid #8BBDF8;
+        border-radius: 50px;
+        color: #8BBDF8;
+        margin-left: 10px;
+    }
+
+    #xinr .er {
+        text-align: center;
+        margin-left: 10px;
+        line-height: 50px;
+        color: #ddd;
+    }
+
+    #xinr .san {
+        width: 20px;
+        height: 20px;
+        margin-top: 15px;
+        text-align: center;
+        border: 1px solid #8BBDF8;
+        margin-left: 15px;
+        border-radius: 50px;
+        color: #8BBDF8;
+    }
+
+
+    #dibu {
+        width: 100%;
+        border: 2px solid #ddd;
+        /* height: 200px; */
+        margin-top: 90px;
+
+    }
+
+    #dibu select {
+        line-height: 50px;
+        margin: 30px;
+        border: 1px solid #DD307F;
+        height: 35px;
+        color: #DD307F;
+    }
+
+    #dibu #dibuyou {
+        margin: 20px;
+    }
+
+    #dibu #dibuyou span {
+        color: #E05E95;
+    }
+
+    #dibu #dibuyou b {
+        margin-left: 25px;
+    }
+
+    #dibu #dibutop {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #dibutibu {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        background-color: #F3F3F3;
+        justify-content: right;
+    }
+
+    .san {
+        width: 15px;
+        height: 15px;
+        margin-top: 18px;
+        text-align: center;
+        border: 3px solid #8BBDF8;
+        margin-left: 15px;
+        font-size: 12px;
+        border-radius: 50px;
+        color: #8BBDF8;
+        margin-right: 15px;
+    }
+
+    .nidaye {
+        text-align: center;
+        background-color: #DD307F;
+        width: 200px;
+        color: #ffff;
+        height: 50px;
+        line-height: 50px;
+    }
+</style>
+
+<body>
+    <div id="box">
+        <div id="box_top">
+            <div class="box_top_tuw" v-for="(item, index) in tabulation" @dblclick="increase">
+                <img :src="item.image" alt="" />
+                <div class="box_top_wenzi">
+                    <span>{{item.offer}}</span><b>￥{{item.age}}</b>
+                    <p><del>{{item.delprice}}</del>{{item.preferential}}折</p>
+                </div>
+                <div class="box_top_tuw_son">
+                    <p>{{item.wenzi}}</p>
+                </div>
+            </div>
+        </div>
+        <div id="box_jiao">
+            <div id="box_jiao_top">
+                <p>特卖商品 {{newDate}}</p>
+                <div class="xian"></div>
+            </div>
+
+            <div id="boxjiao_zhong">
+                <p>配送至<b>广州市</b> &nbsp;|&nbsp; 勾选商品“<input type="checkbox" name="" id="">”即可锁定库存20分钟，倒计时内不用担心商品被抢走~</p>
+            </div>
+            <div id="box_jiaobiao">
+                <div id="box_jiaobiao_top">
+                    <ul>
+                        <li>商品</li>
+                        <li>单价</li>
+                        <li>数量</li>
+                        <li>操作</li>
+                    </ul>
+                </div>
+                <p style="color: #EAA1CB;padding: 10px;">唯品自营</p>
+                <div id="box_jiaobiao_son">
+                    <div id="wuliao">
+                        <div class="box_jiao_son">
+                            <div class="box_jiao_sonzuo">
+                                <input type="checkbox" v-model="isChecked">
+                                <span v-if="isChecked">🔒</span>
+                                <img src="https://img20.360buyimg.com/jdcms/s300x300_jfs/t1/126705/26/30488/45110/641dc2ddF87bbe1a3/9ed102a3f8321d90.jpg.avif"
+                                    alt="">
+                                <div id="p">
+                                    <p>[新中式改良汉服旗袍连衣裙女]宽松气质立领国风盘</p>
+                                    <p>尺码:均码</p>
+                                </div>
+
+                            </div>
+                            <div class="box_jiao_sonzongzuo">
+                                <p> ￥价格</p>
+                            </div>
+                            <div class="box_jiao_sonzhongyou">
+
+                                <input type="text" name="" id="">
+                            </div>
+                            <div class="box_jiao_sonyou">
+                                <p>删除</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="xinr">
+                        <div class="yi">运费</div>
+                        <div class="er">新人免邮</div>
+                        <div class="san">?</div>
+                    </div>
+
+                </div>
+            </div>
+            <div id="dibu">
+                <div id="dibutop">
+                    <div id="dibuzuo">
+                        <select name="" id="">
+                            <option value="使用优惠券">使用优惠券</option>
+                            <option value="5优惠券">5优惠券</option>
+                            <option value="10优惠券">10优惠券</option>
+                        </select>
+                    </div>
+                    <div id="dibuyou">
+                        <p>共<span>2</span>件商品商品金额<b>￥488</b></p>
+                        <p>总金额 (未含运费) <span><b>￥488</b></span> </p>
+                    </div>
+                </div>
+                <div id="dibutibu">
+                    <p>请在倒计时结束前结算</p>
+                    <div class="san">?</div>
+                    <div class="nidaye">
+                        立即结算 19 : 18
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: "#box",
+        data: {
+            isChecked: false,
+            date: this.newDate,
+            newDate: "",
+            tabulation: [
+                {
+                    delprice: "80.00",
+                    offer: "特卖价",
+                    age: "35.00",
+                    image:
+                        "https://img20.360buyimg.com/jdcms/s300x300_jfs/t1/126705/26/30488/45110/641dc2ddF87bbe1a3/9ed102a3f8321d90.jpg.avif",
+                    preferential: "2.9",
+                    wenzi: "2023年新款夏季女装港味小众短款短袖上衣性感别致纯欲.",
+                },
+                {
+                    delprice: "990",
+                    offer: "特卖价",
+                    age: "128.00",
+                    image:
+                        "https://img13.360buyimg.com/jdcms/s300x300_jfs/t1/172937/33/37073/214262/645a40a2Fe62bd0b4/81e0d3562c7fe3e1.jpg.avif",
+                    preferential: "2.2",
+                    wenzi: "Courtney品牌2023复古厚底松糕板鞋牛皮大头丑萌休闲"
+                },
+                {
+                    delprice: "990",
+                    offer: "特卖价",
+                    age: "39.00",
+                    image:
+                        "https://img30.360buyimg.com/jdcms/s300x300_jfs/t1/81043/7/23124/50757/63d5200bF616aef91/d3bbd85f5837791a.jpg.avif",
+                    preferential: "2.7",
+                    wenzi: "夏季纯棉正肩t恤女宽松韩版oversize设计感小众短袖白色半"
+                },
+                {
+                    delprice: "990",
+                    offer: "特卖价",
+                    age: "29.90",
+                    image:
+                        "https://img20.360buyimg.com/jdcms/s300x300_jfs/t1/199328/9/34704/39493/646795ecF6ab98e4b/0c4bc60860a6025b.jpg.avif",
+                    preferential: "",
+                    wenzi: "潮牌中长款显瘦短袖t恤女宽松2023夏季新款纯棉半袖显瘦"
+
+                },
+                {
+                    delprice: "990",
+                    offer: "特卖价",
+                    age: "39.90",
+                    image:
+                        "https://img10.360buyimg.com/jdcms/s300x300_jfs/t1/115031/31/35518/113826/64828280Fdfb9067c/c112d489a14744b6.jpg.avif",
+                    preferential: "",
+                    wenzi: "T-8T冰丝阔腿裤女夏季拖地女大尺码高腰垂感显瘦宽松春"
+
+                },
+                // 下五个
+                {
+                    delprice: "990",
+                    offer: "特卖价",
+                    age: "29.90",
+                    image:
+                        "https://img13.360buyimg.com/jdcms/s300x300_jfs/t1/157207/8/12247/171523/60485e38E9fac23ea/5c576677933a24fa.jpg.avif",
+                    preferential: "2.9",
+                    wenzi: "俞兆林冰丝小吊带无袖背心女夏外穿内搭宽松韩版短款V领"
+
+                },
+                {
+                    delprice: "990",
+                    offer: "特卖价",
+                    age: "55.00",
+                    image:
+                        "https://img10.360buyimg.com/jdcms/s300x300_jfs/t1/181739/4/21193/111765/612a3c1dEa8c8a211/80c2a3e55203595b.jpg.avif",
+                    preferential: "",
+                    wenzi: "高绅风度 长袖衬衫女春夏防皱衬衣韩范修身显瘦气质职业."
+
+                },
+                {
+                    delprice: "990",
+                    offer: "特卖价",
+                    age: "34.00",
+                    image:
+                        "https://img13.360buyimg.com/jdcms/s300x300_jfs/t1/188259/29/24062/128694/6271e351E58fb3bfc/7a06fa2db212baf6.jpg.avif",
+                    preferential: "",
+                    wenzi: "亚百鹿爵士舞服装女甜辣妹风T恤女设计感小众夏季韩版20"
+
+                },
+                {
+                    delprice: "990",
+                    offer: "特卖价",
+                    age: "56.90 ",
+                    image:
+                        "https://img20.360buyimg.com/jdcms/s300x300_jfs/t1/138087/10/32941/65163/63c2d5b4F2ca41131/c344b36ffb941903.jpg.avif",
+                    preferential: "",
+                    wenzi: "朵伶诗儿[2件装]冰丝莫代尔短袖T恤女夏季紧身打底衫"
+
+                },
+                {
+                    delprice: "990",
+                    offer: "特卖价",
+                    age: "30.00",
+                    image:
+                        "https://img20.360buyimg.com/jdcms/s300x300_jfs/t1/182750/13/31541/198381/63fbdd99Fdfb527cc/44bb20928ee05071.jpg.avif",
+                    preferential: "",
+                    wenzi: "美茜露夏天衣服女士夏季上衣今年流行上衣T恤短袖女半"
+
+                },
+
+
+            ],
+        },
+        methods: {
+            // 时间
+            getCurrentTime() {
+                const now = new Date();
+                // const year = now.getFullYear();
+                // const month = now.getMonth() + 1;
+                // const date = now.getDate();
+                const hour = now.getHours();
+                const minute = now.getMinutes();
+                // const second = now.getSeconds();
+                this.newDate = `${hour}:${minute}`;
+            },
+            increase() {
+                console.log(999);
+            }
+        },
+        mounted() {
+            this.getCurrentTime();
+        },
+    })
+</script>
+
+</html>
