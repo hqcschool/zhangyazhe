@@ -15,7 +15,7 @@
 
     h1 {
         margin-bottom: 30px;
-        margin-left: 45%;
+        margin-left: 46%;
     }
 
     #box {
@@ -62,6 +62,8 @@
         font-size: 24px;
         margin-left: 20px;
         font-weight: 500;
+        width: 400px;
+        display: inline-block;
     }
 
     li input {
@@ -77,6 +79,14 @@
         text-decoration-line: line-through;
         color: #ccc;
     }
+
+    .hover-bg {
+        display: block;
+    }
+
+    .cha {
+        display: none;
+    }
 </style>
 
 <body>
@@ -88,10 +98,10 @@
                 <input type="text" class="one" placeholder="请输入要添加的备忘内容" @keyup="add" v-model="jia">
             </div>
             <ul>
-                <li v-for="(item,index) in list" :key="index">
+                <li v-for="(item,index) in list" :key="index" @mouseover="item.qxs = true" @mouseout="item.qxs = false">
                     <input type="checkbox" v-model="item.qx" @change="qxx(index)">
-                    <span :class="{'shanxian':item.qx}">{{item.neir}}</span>
-                    <a @click="del(index)">❌</a>
+                    <span :class="{'shanxian':item.qx}" @click="del(index)">{{item.neir}}</span>
+                    <a v-if="item.qxs">❌</a>
                 </li>
             </ul>
             <div v-if="weiwanc">
@@ -110,6 +120,7 @@
         data: {
             list: [],
             jia: '',
+            hoverIndex: -1,
             wei: 0,
             weiwanc: false,
             shanx: false,
@@ -166,7 +177,8 @@
                         this.list.push({
                             id: aqq,
                             neir: this.jia,
-                            qx: false
+                            qx: false,
+                            qxs: false
                         })
                         localStorage.setItem("beiwang", JSON.stringify(this.list))
                         this.jia = ''
@@ -178,7 +190,7 @@
             },
             del(index) {
                 if (this.list[index].qx == false) {
-                    if (confirm('确定移除吗？')) {
+                    if (confirm('任务未完成，确定移除吗？')) {
                         var dataIdToDelete = this.list[index].id;
                         var existingData = JSON.parse(localStorage.getItem('beiwang'));
                         var updatedData = existingData.filter(function (data) {
