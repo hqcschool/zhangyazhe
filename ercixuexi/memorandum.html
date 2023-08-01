@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="./CDN/开发环境.js"></script>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        margin-bottom: 30px;
+        margin-left: 45%;
+    }
+
+    #box {
+        width: 100%;
+        padding-top: 100px;
+    }
+
+    .shuru {
+        width: 500px;
+        border: 1px solid #ccc;
+        margin: auto;
+        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.3);
+    }
+
+    .one {
+        width: 90%;
+        border: none;
+        height: 80px;
+        font-size: 24px;
+        outline: none;
+        color: #606060;
+    }
+
+    .xuan {
+        width: 8%;
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    li {
+        width: 100%;
+        box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
+        height: 80px;
+        line-height: 80px;
+    }
+
+    .one2 {
+        box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
+    }
+
+    li span {
+        font-size: 24px;
+        margin-left: 20px;
+        font-weight: 500;
+    }
+
+    li input {
+        margin-left: 17px;
+    }
+
+    li a {
+        float: right;
+        margin-right: 20px;
+    }
+
+    .shanxian {
+        text-decoration-line: line-through;
+        color: #ccc;
+    }
+</style>
+
+<body>
+    <div id="box">
+        <h1>备忘录</h1>
+        <div class="shuru">
+            <div class="one2">
+                <input type="checkbox" class="xuan" v-model="selectAll" @change="toggleSelectAll">
+                <input type="text" class="one" placeholder="请输入要添加的备忘内容" @keyup="add" v-model="jia">
+            </div>
+            <ul>
+                <li v-for="(item,index) in list" :key="index">
+                    <input type="checkbox" v-model="item.qx" @change="qxx(index)">
+                    <span :class="{'shanxian':item.qx}">{{item.neir}}</span>
+                    <a @click="del(index)">❌</a>
+                </li>
+            </ul>
+            <div v-if="weiwanc">
+                <span>未完成：{{wei}}</span>
+                <button @click="quanbu($event)">全部</button>
+                <button @click="quanbu($event)">已完成</button>
+                <button @click="quanbu($event)">未完成</button>
+                <button @click="quanbu($event)">全部删除</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: '#box',
+        data: {
+            list: [],
+            jia: '',
+            wei: 0,
+            weiwanc: false,
+            shanx: false,
+            selectAll: false,
+            id: 0
+        },
+        mounted() {
+            let i = JSON.parse(localStorage.getItem("beiwang"))
+            if (i != null) {
+                this.list = i
+                this.weiwanc = true
+            }
+            this.weis()
+        },
+        methods: {
+            weis: function () {
+                let abb = []
+                this.list.forEach((item) => {
+                    if (item.qx == false) {
+                        abb.push(item.qx)
+                    }
+                    this.wei = abb.length
+                });
+            },
+            quanbu(e) {
+                let i = JSON.parse(localStorage.getItem("beiwang"))
+                if (e.target.innerText == '全部') {
+                    this.list = i
+                } else if (e.target.innerText == '已完成') {
+                    this.list = this.list.filter((item) => {
+                        return item.qx == true
+                    })
+                } else if (e.target.innerText == '未完成') {
+                    this.list = this.list.filter((item) => {
+                        return item.qx == false
+                    })
+                } else if (e.target.innerText == '全部删除') {
+                    localStorage.removeItem("beiwang")
+                    let i = JSON.parse(localStorage.getItem("beiwang"))
+                    this.list = i
+                }
+                this.weis()
+            },
+            toggleSelectAll() {
+                this.list.forEach(item => {
+                    item.qx = this.selectAll;
+                });
+                this.weis()
+            },
+            add(e) {
+                if (e.code == 'Enter') {
+                    if (this.jia != '') {
+                        let aqq = this.id++
+                        this.list.push({
+                            id: aqq,
+                            neir: this.jia,
+                            qx: false
+                        })
+                        localStorage.setItem("beiwang", JSON.stringify(this.list))
+                        this.jia = ''
+                        this.weiwanc = true
+                    }
+
+                }
+                this.weis()
+            },
+            del(index) {
+                if (this.list[index].qx == false) {
+                    if (confirm('确定移除吗？')) {
+                        var dataIdToDelete = this.list[index].id;
+                        var existingData = JSON.parse(localStorage.getItem('beiwang'));
+                        var updatedData = existingData.filter(function (data) {
+                            return data.id !== dataIdToDelete;
+                        });
+                        localStorage.setItem('beiwang', JSON.stringify(updatedData));
+                        this.list = updatedData
+                        this.weis()
+                        if (this.list.length == 0) {
+                            this.weiwanc = false
+                        }
+                    }
+                } else {
+                    var dataIdToDelete = this.list[index].id;
+                    var existingData = JSON.parse(localStorage.getItem('beiwang'));
+                    var updatedData = existingData.filter(function (data) {
+                        return data.id !== dataIdToDelete;
+                    });
+                    localStorage.setItem('beiwang', JSON.stringify(updatedData));
+                    this.list = updatedData
+                    this.weis()
+                    if (this.list.length == 0) {
+                        this.weiwanc = false
+                    }
+                }
+            },
+            qxx(index) {
+                if (this.list[index].qx == true) {
+                    this.weis()
+                } else {
+                    this.weis()
+                }
+            }
+        }
+    })
+</script>
+
+</html>
